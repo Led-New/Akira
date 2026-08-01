@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AKIRA</title>
+    <meta name="description" content="DEIXA SUA SOMBRA TER DOMINAR">
+
+    <!-- ImportMap for Three.js -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Krona+One&family=Lexend+Peta:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css?v=2">
+
+    <!-- GSAP & Plugins -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollSmoother.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+    <script type="module" src="script.js"></script>
+</head>
+<body class="theme-light-scroll">
+    <!-- Intro Loader -->
+    <div id="loaderOverlay" class="loaderOverlay">
+        <div class="preloader-text" id="preloaderText">0%</div>
+    </div>
+
+    <!-- Header (Fixed, mix-blend-mode: difference for color adaptation) -->
+    <header class="siteHeader" id="siteHeader">
+        <div class="headerInner">
+            <!-- Logo -->
+            <a href="#" class="headerLogo" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+                AKIRA
+            </a>
+
+            <!-- Right Actions -->
+            <div class="headerRight">
+
+                <div class="hamburger" id="hamburgerBtn" role="button" tabindex="0" aria-label="Menu">
+                    <span class="hamburgerLine"></span>
+                    <span class="hamburgerLine"></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Fullscreen Overlay Menu -->
+    <div class="fullscreenMenu" id="fullscreenMenu">
+        <nav class="fullscreenNav">
+            <a href="#" class="fullscreenLink" data-index="0" onclick="closeMenuAndScroll(0);return false;">
+                <span class="linkNum">01</span>
+                <span class="linkText">Início</span>
+            </a>
+            <a href="#textSequence" class="fullscreenLink" data-index="1" onclick="closeMenuAndScroll('#textSequence');return false;">
+                <span class="linkNum">02</span>
+                <span class="linkText">A História</span>
+            </a>
+            <a href="#model3dSequence" class="fullscreenLink" data-index="2" onclick="closeMenuAndScroll('#model3dSequence');return false;">
+                <span class="linkNum">03</span>
+                <span class="linkText">Neo-Tokyo</span>
+            </a>
+        </nav>
+        <div class="fullscreenMenuFooter">
+            <span>© 2026 AKIRA</span>
+            <span>NEO-TOKYO PROJECT</span>
+        </div>
+    </div>
+
+    <script>
+        // Hamburger Menu Logic
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const fullscreenMenu = document.getElementById('fullscreenMenu');
+        const siteHeader = document.getElementById('siteHeader');
+        let menuOpen = false;
+
+        function toggleMenu(force) {
+            menuOpen = (force !== undefined) ? force : !menuOpen;
+            hamburgerBtn.classList.toggle('hamburgerOpen', menuOpen);
+            fullscreenMenu.classList.toggle('menuVisible', menuOpen);
+            document.body.style.overflow = menuOpen ? 'hidden' : '';
+        }
+
+        hamburgerBtn.addEventListener('click', () => toggleMenu());
+
+        // Close on Escape key (like reference site)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && menuOpen) toggleMenu(false);
+        });
+
+        function closeMenuAndScroll(target) {
+            toggleMenu(false);
+            if (target === 0) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                const el = document.querySelector(target);
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            siteHeader.classList.toggle('headerScrolled', window.scrollY > 50);
+        }, { passive: true });
+    </script>
+    <main>
+        <!-- Hero Section -->
+        <div class="hero-wrapper" style="width: 100%; position: relative; z-index: 1; height: calc(100vh + 1500px);"><section class="hero" data-scroll-theme="light">
+            <!-- Lado Esquerdo (Branco) -->
+            <div class="leftSide">
+                
+
+                <div class="content">
+                    <div class="textContent">
+                        <h1 class="hero-title">DEIXA SUA SOMBRA TE<br/>DOMINAR</h1>
+                        <p>Liberte o poder oculto dentro de você. Enfrente o desconhecido e domine seu destino.</p>
+                        <button class="btn-primary" onclick="document.querySelector('#textSequence').scrollIntoView({ behavior: 'smooth' });">VER MAIS</button>
+                    </div>
+                </div>
+
+                <!-- Hand image absolute positioning -->
+                <img src="public/mao.svg" alt="Braço Robótico" class="roboticHand" />
+
+                <!-- Texto Vertical "AKIRA" (SVG) -->
+                <div class="verticalTitleWrapper">
+                    <svg width="262" height="1129" viewBox="0 0 262 1129" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_2736_196)">
+                            <path d="M27.4399 1022.46L27.4399 975.045L248 868.364V915.354L210.887 932.994V1061.83L248 1078.9V1126.04L27.4399 1022.46ZM174.057 950.633L73.8662 998.329L174.057 1044.76V950.633ZM27.4399 834.073V789.34H141.601L27.4399 672.922V615.63L132.71 724.287L248 615.63L248 675.18L163.896 756.461L195.647 789.34H248V834.073H27.4399ZM27.4399 599.261V554.246H248V599.261H27.4399ZM27.4399 497.095V384.91C27.4399 367.976 29.2274 353.3 32.8022 340.882C36.283 328.464 41.3631 318.163 48.0425 309.979C54.7218 301.794 62.8594 295.726 72.4551 291.775C82.0508 287.73 92.9165 285.707 105.052 285.707C113.237 285.707 121.045 286.695 128.477 288.67C135.815 290.646 142.588 293.703 148.797 297.843C155.006 301.888 160.557 307.015 165.449 313.224C170.247 319.433 174.245 326.724 177.443 335.097L248 287.118V341.87L185.346 383.357V384.627L185.205 452.362H248V497.095H27.4399ZM146.54 383.781C146.54 375.314 145.552 367.929 143.576 361.626C141.601 355.229 138.825 349.914 135.25 345.68C131.676 341.353 127.348 338.154 122.268 336.084C117.094 333.921 111.355 332.839 105.052 332.839C92.7284 332.839 83.2267 337.072 76.5474 345.539C69.7739 354.006 66.3872 366.753 66.3872 383.781V452.362H146.54L146.54 383.781ZM27.4399 157.435V110.021L248 3.33936V50.3301L210.887 67.9692V196.806L248 213.88V261.012L27.4399 157.435ZM174.057 85.6084L73.8662 133.305L174.057 179.731V85.6084Z" fill="black"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_2736_196">
+                                <rect width="262" height="1129" fill="white"/>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Lado Direito (Preto) -->
+            <div class="rightSide">
+
+                <div class="imageWrapperRight">
+                    <img src="public/akira.svg" alt="Sombra/Personagem" class="shadowFigure" />
+                </div>
+            </div>
+
+            <!-- Transition bars for scroll down animation -->
+            <div class="transition">
+                <div></div><div></div><div></div><div></div><div></div>
+                <div></div><div></div><div></div><div></div><div></div>
+            </div>
+        </section>
+        </div>
+
+        <!-- Text Sequence Section (Tela Preta Inicial) -->
+        <section class="textSequenceContainer" id="textSequence" data-scroll-theme="dark">
+            <div class="stickyWrapper">
+                <div class="textLayer" id="layer1">
+                    <h2 class="text">ALGO ESTÁ PRESTES A DESPERTAR.</h2>
+                </div>
+                
+                <div class="textLayer" id="layer2">
+                    <h2 class="text">ANTES DA LUZ, EXISTIA UMA SOMBRA.</h2>
+                </div>
+
+                <div class="textLayer" id="layer3">
+                    <h2 class="text">UMA FORÇA QUE NÃO PODE SER CONTIDA.</h2>
+                </div>
+            </div>
+        </section>
+    </main>
+
+        <!-- 3D Model Dedicated Section with overlay texts -->
+        <section class="model3dContainer" id="model3dSequence" data-scroll-theme="darker">
+            <div class="stickyWrapper" style="background-color: #050505;">
+                <!-- WebGL Canvas -->
+                <canvas id="webgl-canvas" style="width: 100vw; height: 100vh; display: block; outline: none;"></canvas>
+
+                <!-- Textos sobrepostos no 3D (Estilo Akira/Cyberpunk) -->
+                <div class="textLayer3d" id="layer3d_1" style="mix-blend-mode: difference; color: #ffffff; pointer-events: none; position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; opacity: 0; z-index: 5;">
+                    <h2 class="text" style="color: #ffffff; font-family: var(--font-title); font-size: clamp(2rem, 7vw, 6rem); text-align: center;">SUPRESSOR<br/>EXPERIMENTAL</h2>
+                </div>
+                
+                <div class="textLayer3d" id="layer3d_2" style="mix-blend-mode: difference; color: #ffffff; pointer-events: none; position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; opacity: 0; z-index: 5;">
+                    <h2 class="text" style="color: #ffffff; font-family: var(--font-title); font-size: clamp(2rem, 7vw, 6rem); text-align: center;">CLASSE A</h2>
+                </div>
+
+                <div class="textLayer3d" id="layer3d_3" style="mix-blend-mode: difference; color: #ffffff; pointer-events: none; position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; opacity: 0; z-index: 5;">
+                    <h2 class="text" style="color: #ffffff; font-family: var(--font-title); font-size: clamp(2rem, 7vw, 6rem); text-align: center;">PROJETO AKIRA</h2>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trailer Pill Section (White background) -->
+        <div class="trailer-wrapper" style="width: 100%; position: relative; z-index: 10; height: calc(100vh + 1500px);">
+        <section class="trailerSection" id="trailerSection" style="background-color: #ffffff; width: 100%; min-height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 40px 20px; position: sticky; top: 0; z-index: 10;">
+            <div id="trailerPillSection" style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <div class="revealText" style="color: #000000; text-shadow: none;">O ÚLTIMO ATO COMEÇA AGORA.</div>
+                
+                <div class="videoPillContainer" style="aspect-ratio: 16/9; max-width: 1000px; width: 90vw; height: auto; background: #000; border-radius: 22px; overflow: hidden; box-shadow: 0 18px 70px rgba(230, 0, 0, 0.2); margin-top: 40px;">
+                    <iframe id="trailerIframe" src="https://www.youtube.com/embed/vvnNpjH93NU?autoplay=1&mute=1&loop=1&playlist=vvnNpjH93NU" allow="autoplay; encrypted-media" allowfullscreen style="width: 100%; height: 100%; border: none; display: block;"></iframe>
+                </div>
+            </div>
+        </section>
+        </div>
+
+        <!-- Onde Assistir Section -->
+        <section class="ondeAssistirSection" id="ondeAssistir" data-scroll-theme="light">
+            <span class="bgTextOndeAssistir">ASSISTIR</span>
+            <div class="ondeAssistirInner">
+                <h2 class="ondeAssistirTitle">Onde Assistir</h2>
+                
+                <div class="ondeAssistirGrid">
+                    <!-- Netflix -->
+                    <div class="ondeAssistirCard">
+                        <h3 class="serviceName">Netflix</h3>
+                        <ul class="serviceFeatures">
+                            <li class="serviceFeature">Resolução 4K HDR</li>
+                            <li class="serviceFeature">Áudio Original Japonês</li>
+                            <li class="serviceFeature">Legendas em Português</li>
+                            <li class="serviceFeature">Dublagem Clássica</li>
+                        </ul>
+                        <a href="https://www.netflix.com" target="_blank" class="ctaBtnOndeAssistir netflix">Assistir na Netflix</a>
+                    </div>
+
+                    <!-- Crunchyroll (Highlight) -->
+                    <div class="ondeAssistirCard highlight">
+                        <span class="ondeAssistirBadge">Recomendado</span>
+                        <h3 class="serviceName">Crunchyroll</h3>
+                        <ul class="serviceFeatures">
+                            <li class="serviceFeature">Resolução 1080p</li>
+                            <li class="serviceFeature">Catálogo Completo</li>
+                            <li class="serviceFeature">Áudio Original Japonês</li>
+                            <li class="serviceFeature">Sem Anúncios (Premium)</li>
+                        </ul>
+                        <a href="https://www.crunchyroll.com" target="_blank" class="ctaBtnOndeAssistir crunchyroll">Ver na Crunchyroll</a>
+                    </div>
+
+                    <!-- Prime Video -->
+                    <div class="ondeAssistirCard">
+                        <h3 class="serviceName">Prime Video</h3>
+                        <ul class="serviceFeatures">
+                            <li class="serviceFeature">Resolução 1080p</li>
+                            <li class="serviceFeature">Incluído no Prime</li>
+                            <li class="serviceFeature">Áudio Original Japonês</li>
+                            <li class="serviceFeature">Legendas e Dublagem</li>
+                        </ul>
+                        <a href="https://www.primevideo.com" target="_blank" class="ctaBtnOndeAssistir prime">Ver no Prime Video</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 80px; font-family: var(--font-body); color: rgba(0, 0, 0, 0.5); font-size: 0.9rem; text-align: center; position: relative; z-index: 1;">
+                <p>Verifique a disponibilidade na sua região.</p>
+                <p style="margin-top: 10px;">&copy; 2026 PROJETO AKIRA. TODOS OS DIREITOS RESERVADOS.</p>
+            </div>
+        </section>
+</body>
+</html>
