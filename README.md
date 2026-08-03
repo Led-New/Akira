@@ -38,7 +38,7 @@
 
 ---
 ## 🚀 Ver em live
- - **Akira**: [@Akira]([https://github.com/Led-New](https://akira-site-three.vercel.app))
+ - **Akira**: [@Akira](https://akira-site-three.vercel.app)
 
 ## 👨‍💻 Desenvolvido por
 
